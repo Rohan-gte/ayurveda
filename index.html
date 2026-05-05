@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vaidya — Ancient Ayurvedic Healing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8D28A;
+    --gold-pale: #F5EDD0;
+    --deep-green: #1A2F1A;
+    --mid-green: #2D4A2D;
+    --sage: #6B8C5A;
+    --sage-light: #A8C090;
+    --cream: #FAF6EE;
+    --cream-warm: #F2EAD8;
+    --text-dark: #1A1A14;
+    --text-mid: #4A4A3A;
+    --text-light: #8A8A7A;
+    --terracotta: #C47844;
+    --rust: #8B3A1A;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4vw;
+    background: rgba(26, 47, 26, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+    transition: padding 0.4s;
+  }
+  nav.scrolled { padding: 0.8rem 4vw; }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem; font-weight: 300;
+    color: var(--gold-light);
+    letter-spacing: 0.08em;
+  }
+  .nav-logo span { color: var(--sage-light); font-style: italic; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none; font-size: 0.8rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold-light); }
+  .nav-cta {
+    background: var(--gold);
+    color: var(--deep-green) !important;
+    padding: 0.5rem 1.4rem;
+    border-radius: 2px;
+    font-weight: 500 !important;
+    transition: background 0.3s !important;
+  }
+  .nav-cta:hover { background: var(--gold-light) !important; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 24px; height: 1.5px; background: var(--gold-light); transition: 0.3s; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--deep-green);
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(107, 140, 90, 0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 10% 80%, rgba(201, 168, 76, 0.08) 0%, transparent 50%);
+  }
+  .hero-bg-circle {
+    position: absolute; right: -10vw; top: 50%;
+    transform: translateY(-50%);
+    width: 55vw; height: 55vw;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(107, 140, 90, 0.12) 0%, transparent 70%);
+    border: 1px solid rgba(201, 168, 76, 0.12);
+    animation: pulse-ring 6s ease-in-out infinite;
+  }
+  .hero-bg-circle::before {
+    content: ''; position: absolute; inset: 8%;
+    border-radius: 50%;
+    border: 1px solid rgba(201, 168, 76, 0.08);
+    animation: pulse-ring 6s ease-in-out infinite reverse;
+  }
+  @keyframes pulse-ring { 0%,100%{ transform: translateY(-50%) scale(1); } 50%{ transform: translateY(-50%) scale(1.04); } }
+
+  .hero-content {
+    padding: 8rem 4vw 4rem 8vw;
+    position: relative; z-index: 2;
+  }
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(201, 168, 76, 0.4);
+    padding: 0.4rem 1rem; border-radius: 2px;
+    margin-bottom: 2rem;
+    animation: fade-up 0.8s ease both;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    font-weight: 300; line-height: 1.1;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    animation: fade-up 0.8s 0.15s ease both;
+  }
+  .hero h1 em { color: var(--sage-light); font-style: italic; }
+  .hero-sub {
+    font-size: 1rem; line-height: 1.8;
+    color: rgba(255,255,255,0.6);
+    max-width: 440px;
+    margin-bottom: 2.5rem;
+    animation: fade-up 0.8s 0.3s ease both;
+  }
+  .hero-btns {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fade-up 0.8s 0.45s ease both;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--deep-green);
+    padding: 0.9rem 2.2rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase;
+    font-weight: 500;
+    border: none; border-radius: 2px; cursor: pointer;
+    text-decoration: none; display: inline-block;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-ghost {
+    background: transparent;
+    color: rgba(255,255,255,0.8);
+    padding: 0.9rem 2.2rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 2px; cursor: pointer;
+    text-decoration: none; display: inline-block;
+    transition: border-color 0.3s, color 0.3s, transform 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+  .hero-image-side {
+    position: relative; height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    animation: fade-up 1s 0.3s ease both;
+  }
+  .hero-img-frame {
+    position: relative; width: 85%; max-width: 520px;
+    aspect-ratio: 3/4;
+    border-radius: 4px; overflow: hidden;
+  }
+  .hero-img-frame img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: saturate(0.9);
+  }
+  .hero-img-frame::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent 50%, rgba(26,47,26,0.5) 100%);
+  }
+  .hero-float-badge {
+    position: absolute; bottom: 2rem; left: -2rem;
+    background: var(--gold);
+    padding: 1rem 1.5rem; border-radius: 4px;
+    animation: float 4s ease-in-out infinite;
+  }
+  .hero-float-badge .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 300;
+    color: var(--deep-green); display: block;
+  }
+  .hero-float-badge .lbl {
+    font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--deep-green); opacity: 0.7;
+  }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SCROLLING MARQUEE ── */
+  .marquee-strip {
+    background: var(--gold);
+    padding: 0.8rem 0; overflow: hidden;
+  }
+  .marquee-track {
+    display: flex; gap: 3rem; width: max-content;
+    animation: marquee 30s linear infinite;
+  }
+  .marquee-item {
+    display: flex; align-items: center; gap: 0.8rem;
+    font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--deep-green); font-weight: 500; white-space: nowrap;
+  }
+  .marquee-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--mid-green); }
+  @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+  /* ── SECTIONS ── */
+  section { padding: 7rem 8vw; }
+  .section-tag {
+    font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem; display: block;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 300; line-height: 1.15;
+    color: var(--deep-green);
+  }
+  .section-title em { color: var(--sage); font-style: italic; }
+
+  /* ── ABOUT ── */
+  .about { background: var(--cream); }
+  .about-inner {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 6rem; align-items: center;
+  }
+  .about-img-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr; gap: 1rem;
+    height: 520px;
+  }
+  .about-img-grid img {
+    width: 100%; height: 100%; object-fit: cover;
+    border-radius: 4px;
+  }
+  .about-img-grid .img-large {
+    grid-row: 1 / 3;
+  }
+  .about-text p {
+    font-size: 1rem; line-height: 1.9;
+    color: var(--text-mid); margin: 1.5rem 0;
+  }
+  .about-stats {
+    display: flex; gap: 2.5rem; margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+  .stat-item .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem; font-weight: 300;
+    color: var(--deep-green);
+    display: block;
+  }
+  .stat-item .stat-lbl {
+    font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-light);
+  }
+
+  /* ── SERVICES ── */
+  .services { background: var(--deep-green); padding: 7rem 8vw; }
+  .services .section-title { color: #fff; }
+  .services .section-title em { color: var(--sage-light); }
+  .services-header {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: end; margin-bottom: 4rem;
+  }
+  .services-header p {
+    color: rgba(255,255,255,0.55); font-size: 0.95rem; line-height: 1.8;
+  }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px; background: rgba(201,168,76,0.15);
+  }
+  .service-card {
+    background: rgba(26,47,26,0.95);
+    padding: 2.5rem;
+    transition: background 0.4s, transform 0.3s;
+    position: relative; overflow: hidden;
+    cursor: pointer;
+  }
+  .service-card::before {
+    content: ''; position: absolute;
+    bottom: 0; left: 0; right: 0; height: 3px;
+    background: var(--gold);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.4s;
+  }
+  .service-card:hover { background: rgba(45,74,45,0.98); }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem; color: var(--gold); opacity: 0.6;
+    margin-bottom: 1.5rem; display: block;
+  }
+  .service-icon {
+    width: 48px; height: 48px; margin-bottom: 1.5rem;
+    opacity: 0.8;
+  }
+  .service-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 400;
+    color: #fff; margin-bottom: 0.8rem;
+  }
+  .service-card p {
+    font-size: 0.88rem; line-height: 1.8;
+    color: rgba(255,255,255,0.5);
+  }
+  .service-link {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    margin-top: 1.5rem;
+    font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gold); opacity: 0;
+    transition: opacity 0.3s;
+    cursor: pointer;
+  }
+  .service-card:hover .service-link { opacity: 1; }
+  .service-link::after { content: '→'; }
+
+  /* ── DOSHAS ── */
+  .doshas { background: var(--cream-warm); }
+  .doshas-header { text-align: center; margin-bottom: 4rem; }
+  .doshas-header p {
+    max-width: 560px; margin: 1.5rem auto 0;
+    font-size: 1rem; line-height: 1.8; color: var(--text-mid);
+  }
+  .doshas-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+  }
+  .dosha-card {
+    padding: 3rem 2rem;
+    border: 1px solid rgba(107,140,90,0.2);
+    border-radius: 4px;
+    text-align: center;
+    transition: transform 0.4s, box-shadow 0.4s, border-color 0.4s;
+    position: relative; overflow: hidden;
+    background: var(--cream);
+  }
+  .dosha-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  }
+  .dosha-card.vata::before { background: linear-gradient(90deg, #85b7eb, #7F77DD); }
+  .dosha-card.pitta::before { background: linear-gradient(90deg, #C47844, #E24B4A); }
+  .dosha-card.kapha::before { background: linear-gradient(90deg, #639922, #1D9E75); }
+  .dosha-card:hover { transform: translateY(-8px); box-shadow: 0 24px 48px rgba(26,47,26,0.12); border-color: var(--sage); }
+  .dosha-symbol {
+    width: 80px; height: 80px; border-radius: 50%;
+    margin: 0 auto 1.5rem;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 300;
+  }
+  .vata .dosha-symbol { background: rgba(133,183,235,0.15); color: #378ADD; }
+  .pitta .dosha-symbol { background: rgba(196,120,68,0.15); color: var(--terracotta); }
+  .kapha .dosha-symbol { background: rgba(107,140,90,0.15); color: var(--sage); }
+  .dosha-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 300;
+    color: var(--deep-green); margin-bottom: 0.3rem;
+  }
+  .dosha-subtitle {
+    font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--text-light); margin-bottom: 1.2rem;
+  }
+  .dosha-card p { font-size: 0.9rem; line-height: 1.8; color: var(--text-mid); }
+  .dosha-tags {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    justify-content: center; margin-top: 1.5rem;
+  }
+  .dosha-tag {
+    font-size: 0.72rem; letter-spacing: 0.08em;
+    padding: 0.3rem 0.8rem;
+    border-radius: 2px; border: 1px solid rgba(107,140,90,0.2);
+    color: var(--text-mid);
+    background: var(--cream-warm);
+  }
+
+  /* ── INGREDIENTS ── */
+  .ingredients { background: #fff; }
+  .ingredients-header {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: end; margin-bottom: 4rem;
+  }
+  .ingredients-header p { font-size: 0.95rem; line-height: 1.8; color: var(--text-mid); }
+  .ingredients-scroll {
+    display: flex; gap: 1.5rem; overflow-x: auto; padding-bottom: 1.5rem;
+    scrollbar-width: thin; scrollbar-color: var(--gold) transparent;
+  }
+  .ingredients-scroll::-webkit-scrollbar { height: 2px; }
+  .ingredients-scroll::-webkit-scrollbar-track { background: transparent; }
+  .ingredients-scroll::-webkit-scrollbar-thumb { background: var(--gold); }
+  .ingredient-card {
+    flex: 0 0 260px;
+    border: 1px solid rgba(107,140,90,0.15);
+    border-radius: 4px; overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .ingredient-card:hover { transform: translateY(-4px); box-shadow: 0 16px 32px rgba(26,47,26,0.1); }
+  .ingredient-img { height: 200px; overflow: hidden; }
+  .ingredient-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+  .ingredient-card:hover .ingredient-img img { transform: scale(1.08); }
+  .ingredient-info { padding: 1.5rem; }
+  .ingredient-info h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-weight: 400;
+    color: var(--deep-green); margin-bottom: 0.3rem;
+  }
+  .ingredient-info .sanskrit {
+    font-size: 0.75rem; color: var(--gold); font-style: italic;
+    margin-bottom: 0.8rem; display: block;
+  }
+  .ingredient-info p { font-size: 0.85rem; line-height: 1.7; color: var(--text-mid); }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials { background: var(--deep-green); padding: 7rem 8vw; }
+  .testimonials .section-title { color: #fff; }
+  .testimonials .section-title em { color: var(--sage-light); }
+  .test-header { text-align: center; margin-bottom: 4rem; }
+  .test-header p { color: rgba(255,255,255,0.5); max-width: 500px; margin: 1rem auto 0; font-size: 0.95rem; line-height: 1.8; }
+  .test-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
+  .test-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 4px; padding: 2.5rem;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .test-card:hover { background: rgba(255,255,255,0.07); border-color: rgba(201,168,76,0.35); }
+  .test-stars { color: var(--gold); font-size: 0.9rem; letter-spacing: 0.1em; margin-bottom: 1.2rem; }
+  .test-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem; font-weight: 300; font-style: italic;
+    line-height: 1.7; color: rgba(255,255,255,0.8);
+    margin-bottom: 1.5rem;
+  }
+  .test-author { display: flex; align-items: center; gap: 0.8rem; }
+  .test-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    overflow: hidden; flex-shrink: 0;
+    border: 2px solid rgba(201,168,76,0.3);
+  }
+  .test-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .test-name {
+    font-size: 0.88rem; font-weight: 500; color: #fff; display: block;
+  }
+  .test-loc { font-size: 0.78rem; color: rgba(255,255,255,0.4); }
+
+  /* ── CTA BANNER ── */
+  .cta-section {
+    background: var(--gold);
+    padding: 5rem 8vw;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 3rem; flex-wrap: wrap;
+  }
+  .cta-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300; color: var(--deep-green);
+    line-height: 1.2;
+  }
+  .cta-section h2 em { font-style: italic; }
+  .btn-dark {
+    background: var(--deep-green);
+    color: var(--gold-light);
+    padding: 1rem 2.5rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase;
+    font-weight: 500; border: none; border-radius: 2px; cursor: pointer;
+    white-space: nowrap; text-decoration: none; display: inline-block;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .btn-dark:hover { background: var(--mid-green); transform: translateY(-2px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--text-dark);
+    padding: 5rem 8vw 2rem;
+    color: rgba(255,255,255,0.6);
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 4rem; margin-bottom: 4rem;
+  }
+  .footer-brand .nav-logo { display: block; margin-bottom: 1rem; }
+  .footer-brand p { font-size: 0.88rem; line-height: 1.8; max-width: 280px; }
+  .footer-col h4 {
+    font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 1.2rem;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 0.7rem; }
+  .footer-col ul a {
+    color: rgba(255,255,255,0.6); text-decoration: none;
+    font-size: 0.88rem; transition: color 0.3s;
+  }
+  .footer-col ul a:hover { color: var(--gold-light); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding-top: 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+    font-size: 0.78rem; color: rgba(255,255,255,0.3);
+  }
+  .social-links { display: flex; gap: 1.2rem; }
+  .social-links a {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.5); text-decoration: none;
+    font-size: 0.8rem; transition: border-color 0.3s, color 0.3s;
+  }
+  .social-links a:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal-left.visible { opacity: 1; transform: translateX(0); }
+  .reveal-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+  /* ── LEAF DECO ── */
+  .leaf-deco {
+    position: absolute; opacity: 0.06;
+    pointer-events: none; user-select: none;
+  }
+
+  /* ── MOBILE NAV ── */
+  .mobile-menu {
+    display: none; position: fixed; inset: 0; z-index: 99;
+    background: var(--deep-green);
+    flex-direction: column; align-items: center; justify-content: center;
+    gap: 2rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 300;
+    color: rgba(255,255,255,0.8); text-decoration: none;
+    transition: color 0.3s;
+  }
+  .mobile-menu a:hover { color: var(--gold-light); }
+  .close-menu {
+    position: absolute; top: 1.5rem; right: 4vw;
+    font-size: 1.5rem; color: rgba(255,255,255,0.5);
+    cursor: pointer; background: none; border: none;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-image-side { display: none; }
+    .hero-content { padding: 7rem 6vw 4rem; }
+    .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .services-header { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .doshas-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+    .ingredients-header { grid-template-columns: 1fr; gap: 1.5rem; }
+    .test-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    section { padding: 5rem 6vw; }
+  }
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 2.6rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .cta-section { flex-direction: column; align-items: flex-start; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .about-img-grid { height: 320px; }
+    .hero-float-badge { display: none; }
+    section { padding: 4rem 5vw; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">Vaidya <span>Ayurveda</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Treatments</a></li>
+    <li><a href="#doshas">Doshas</a></li>
+    <li><a href="#ingredients">Herbs</a></li>
+    <li><a href="#contact" class="nav-cta">Book Now</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close-menu" id="closeMenu">✕</button>
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#services" onclick="closeMobile()">Treatments</a>
+  <a href="#doshas" onclick="closeMobile()">Doshas</a>
+  <a href="#ingredients" onclick="closeMobile()">Herbs</a>
+  <a href="#contact" onclick="closeMobile()">Book Now</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg-circle"></div>
+  <div class="hero-content">
+    <span class="hero-tag">5000 Years of Wisdom</span>
+    <h1>Heal the body,<br><em>balance</em> the soul</h1>
+    <p class="hero-sub">Ancient Ayurvedic healing rooted in nature. Personalised treatments for your unique constitution, harmonising mind, body and spirit.</p>
+    <div class="hero-btns">
+      <a href="#services" class="btn-primary">Explore Treatments</a>
+      <a href="#doshas" class="btn-ghost">Discover Your Dosha</a>
+    </div>
+  </div>
+  <div class="hero-image-side">
+    <div class="hero-img-frame">
+      <img src="hero.png" alt="Ayurvedic Treatment">
+    </div>
+    <div class="hero-float-badge">
+      <span class="num">25+</span>
+      <span class="lbl">Years of Practice</span>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <div class="marquee-item"><span class="marquee-dot"></span>Panchakarma</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Abhyanga Massage</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Shirodhara</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Vata · Pitta · Kapha</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Herbal Remedies</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Yoga & Meditation</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Diet & Nutrition</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Panchakarma</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Abhyanga Massage</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Shirodhara</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Vata · Pitta · Kapha</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Herbal Remedies</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Yoga & Meditation</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Diet & Nutrition</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-img-grid reveal-left">
+      <img class="img-large" src="about1.png" alt="Ayurvedic herbs and oils">
+      <img src="about2.png" alt="Treatment oils">
+      <img src="about3.png" alt="Spa setting">
+    </div>
+    <div class="about-text reveal-right">
+      <span class="section-tag">Our Philosophy</span>
+      <h2 class="section-title">Where ancient <em>wisdom</em><br>meets modern wellness</h2>
+      <p>Rooted in the timeless knowledge of Ayurveda — the "Science of Life" — our practice bridges 5,000-year-old Indian healing traditions with the needs of contemporary living.</p>
+      <p>Every treatment is crafted to restore your body's natural intelligence, using pure herbal formulations, therapeutic oils, and time-tested healing rituals.</p>
+      <div class="about-stats">
+        <div class="stat-item">
+          <span class="stat-num">5000+</span>
+          <span class="stat-lbl">Years of Ayurveda</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">3200+</span>
+          <span class="stat-lbl">Patients Healed</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">40+</span>
+          <span class="stat-lbl">Herbal Formulas</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-header">
+    <div class="reveal-left">
+      <span class="section-tag">Our Treatments</span>
+      <h2 class="section-title">Ancient therapies for <em>modern healing</em></h2>
+    </div>
+    <div class="reveal-right">
+      <p>Each treatment is personalised to your unique prakriti (body constitution), targeting the root cause of imbalance rather than merely managing symptoms.</p>
+    </div>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <span class="service-num">01</span>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="20" stroke="#C9A84C" stroke-width="1"/>
+        <path d="M24 12 C24 12, 16 20, 16 28 C16 34, 20 38, 24 38 C28 38, 32 34, 32 28 C32 20, 24 12, 24 12Z" stroke="#C9A84C" stroke-width="1" fill="none"/>
+      </svg>
+      <h3>Panchakarma</h3>
+      <p>The royal detoxification therapy — a comprehensive cleanse that eliminates deep-seated toxins and rebalances your doshas.</p>
+      <span class="service-link">Learn more</span>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-num">02</span>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none">
+        <path d="M8 36 Q24 20 40 36" stroke="#C9A84C" stroke-width="1" fill="none"/>
+        <circle cx="24" cy="18" r="8" stroke="#C9A84C" stroke-width="1"/>
+        <line x1="24" y1="26" x2="24" y2="36" stroke="#C9A84C" stroke-width="1"/>
+      </svg>
+      <h3>Shirodhara</h3>
+      <p>A continuous stream of warm oil poured over the third eye — melting away stress, anxiety and mental fatigue with deep meditative calm.</p>
+      <span class="service-link">Learn more</span>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-num">03</span>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none">
+        <path d="M10 24 Q18 12 24 24 Q30 36 38 24" stroke="#C9A84C" stroke-width="1" fill="none"/>
+        <path d="M10 32 Q18 20 24 32 Q30 44 38 32" stroke="#C9A84C" stroke-width="1" fill="none" opacity="0.5"/>
+      </svg>
+      <h3>Abhyanga</h3>
+      <p>A full-body warm oil massage with rhythmic strokes that nourish tissues, stimulate lymphatic flow and restore vitality from within.</p>
+      <span class="service-link">Learn more</span>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-num">04</span>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none">
+        <rect x="10" y="20" width="28" height="16" rx="2" stroke="#C9A84C" stroke-width="1"/>
+        <path d="M18 20 L18 16 Q24 10 30 16 L30 20" stroke="#C9A84C" stroke-width="1" fill="none"/>
+        <line x1="24" y1="24" x2="24" y2="32" stroke="#C9A84C" stroke-width="1"/>
+        <line x1="20" y1="28" x2="28" y2="28" stroke="#C9A84C" stroke-width="1"/>
+      </svg>
+      <h3>Herbal Medicine</h3>
+      <p>Bespoke formulations of classical Ayurvedic herbs — Ashwagandha, Triphala, Brahmi — tailored to your constitutional needs.</p>
+      <span class="service-link">Learn more</span>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-num">05</span>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none">
+        <circle cx="24" cy="16" r="6" stroke="#C9A84C" stroke-width="1"/>
+        <path d="M14 36 C14 28, 34 28, 34 36" stroke="#C9A84C" stroke-width="1" fill="none"/>
+        <path d="M8 42 L40 42" stroke="#C9A84C" stroke-width="1"/>
+      </svg>
+      <h3>Yoga & Pranayama</h3>
+      <p>Therapeutic yoga practices specifically sequenced to pacify your dominant dosha and strengthen the body-mind connection.</p>
+      <span class="service-link">Learn more</span>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-num">06</span>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none">
+        <path d="M24 8 L28 18 L38 18 L30 25 L33 36 L24 30 L15 36 L18 25 L10 18 L20 18 Z" stroke="#C9A84C" stroke-width="1" fill="none"/>
+      </svg>
+      <h3>Ayurvedic Diet</h3>
+      <p>Food as medicine — personalised nutritional guidance aligned with seasonal rhythms, your dosha and your life's current chapter.</p>
+      <span class="service-link">Learn more</span>
+    </div>
+  </div>
+</section>
+
+<!-- DOSHAS -->
+<section class="doshas" id="doshas">
+  <div class="doshas-header reveal">
+    <span class="section-tag">The Three Doshas</span>
+    <h2 class="section-title">Discover your <em>prakriti</em></h2>
+    <p>In Ayurveda, all matter is composed of five elements. These combine to form three bio-energies — or doshas — that govern every aspect of your physical and mental wellbeing.</p>
+  </div>
+  <div class="doshas-grid">
+    <div class="dosha-card vata reveal">
+      <div class="dosha-symbol">V</div>
+      <h3>Vata</h3>
+      <p class="dosha-subtitle">Air &amp; Space</p>
+      <p>Governs all movement in the body — breathing, circulation, nerve impulses. When in balance: creative, lively, enthusiastic.</p>
+      <div class="dosha-tags">
+        <span class="dosha-tag">Creative</span>
+        <span class="dosha-tag">Energetic</span>
+        <span class="dosha-tag">Quick mind</span>
+        <span class="dosha-tag">Slender</span>
+      </div>
+    </div>
+    <div class="dosha-card pitta reveal">
+      <div class="dosha-symbol">P</div>
+      <h3>Pitta</h3>
+      <p class="dosha-subtitle">Fire &amp; Water</p>
+      <p>Governs transformation and metabolism — digestion, intelligence, ambition. When balanced: sharp, focused and courageous.</p>
+      <div class="dosha-tags">
+        <span class="dosha-tag">Focused</span>
+        <span class="dosha-tag">Ambitious</span>
+        <span class="dosha-tag">Sharp wit</span>
+        <span class="dosha-tag">Athletic</span>
+      </div>
+    </div>
+    <div class="dosha-card kapha reveal">
+      <div class="dosha-symbol">K</div>
+      <h3>Kapha</h3>
+      <p class="dosha-subtitle">Earth &amp; Water</p>
+      <p>Governs structure and lubrication — strength, stability, love and compassion. When balanced: calm, patient and nurturing.</p>
+      <div class="dosha-tags">
+        <span class="dosha-tag">Calm</span>
+        <span class="dosha-tag">Grounded</span>
+        <span class="dosha-tag">Strong</span>
+        <span class="dosha-tag">Nurturing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INGREDIENTS -->
+<section class="ingredients" id="ingredients">
+  <div class="ingredients-header">
+    <div class="reveal-left">
+      <span class="section-tag">Sacred Herbs</span>
+      <h2 class="section-title">Nature's <em>pharmacy</em></h2>
+    </div>
+    <div class="reveal-right">
+      <p>We source only wild-harvested and organically grown herbs, prepared using classical Ayurvedic methods that preserve their full therapeutic potency.</p>
+    </div>
+  </div>
+  <div class="ingredients-scroll">
+    <div class="ingredient-card">
+      <div class="ingredient-img"><img src="ashwagandha.png" alt="Ashwagandha" loading="lazy"></div>
+      <div class="ingredient-info">
+        <span class="sanskrit">Withania somnifera</span>
+        <h4>Ashwagandha</h4>
+        <p>The ultimate adaptogen — reduces cortisol, builds vitality and restores depleted energy reserves.</p>
+      </div>
+    </div>
+    <div class="ingredient-card">
+      <div class="ingredient-img"><img src="turmeric.png" alt="Turmeric" loading="lazy"></div>
+      <div class="ingredient-info">
+        <span class="sanskrit">Curcuma longa</span>
+        <h4>Turmeric</h4>
+        <p>Golden healer — powerful anti-inflammatory, blood purifier and digestive tonic revered for millennia.</p>
+      </div>
+    </div>
+    <div class="ingredient-card">
+      <div class="ingredient-img"><img src="tulsi.png" alt="Tulsi" loading="lazy"></div>
+      <div class="ingredient-info">
+        <span class="sanskrit">Ocimum tenuiflorum</span>
+        <h4>Tulsi</h4>
+        <p>Sacred basil — balances Vata and Kapha, clears respiratory passages and sharpens mental clarity.</p>
+      </div>
+    </div>
+    <div class="ingredient-card">
+      <div class="ingredient-img"><img src="brahmi.png" alt="Brahmi" loading="lazy"></div>
+      <div class="ingredient-info">
+        <span class="sanskrit">Bacopa monnieri</span>
+        <h4>Brahmi</h4>
+        <p>The brain tonic — enhances memory, reduces anxiety and calms an overactive nervous system.</p>
+      </div>
+    </div>
+    <div class="ingredient-card">
+      <div class="ingredient-img"><img src="neem.png" alt="Neem" loading="lazy"></div>
+      <div class="ingredient-info">
+        <span class="sanskrit">Azadirachta indica</span>
+        <h4>Neem</h4>
+        <p>Nature's antibiotic — deeply detoxifying, purifies blood, skin and supports immune resilience.</p>
+      </div>
+    </div>
+    <div class="ingredient-card">
+      <div class="ingredient-img"><img src="shatavari.png" alt="Shatavari" loading="lazy"></div>
+      <div class="ingredient-info">
+        <span class="sanskrit">Zingiber officinale</span>
+        <h4>Shatavari</h4>
+        <p>Queen of herbs — deeply nourishing for women, balances hormones and strengthens reproductive tissues.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="test-header reveal">
+    <span class="section-tag" style="color:var(--gold)">What People Say</span>
+    <h2 class="section-title">Healing <em>stories</em></h2>
+    <p>Thousands have experienced the transformative power of authentic Ayurvedic care. Here are a few of their journeys.</p>
+  </div>
+  <div class="test-grid">
+    <div class="test-card reveal">
+      <div class="test-stars">★ ★ ★ ★ ★</div>
+      <p class="test-text">"After years of chronic fatigue and digestive issues, three weeks of Panchakarma completely transformed my energy. I feel reborn — lighter, clearer, more alive."</p>
+      <div class="test-author">
+        <div class="test-avatar"><img src="https://images.unsplash.com/photo-1494790108755-2616b612b19b?w=100&q=80" alt="Priya S."></div>
+        <div>
+          <span class="test-name">Priya S.</span>
+          <span class="test-loc">Bengaluru, India</span>
+        </div>
+      </div>
+    </div>
+    <div class="test-card reveal">
+      <div class="test-stars">★ ★ ★ ★ ★</div>
+      <p class="test-text">"The Shirodhara experience was unlike anything I've known. My anxiety dissolved. The doctor's depth of knowledge and genuine care is extraordinary."</p>
+      <div class="test-author">
+        <div class="test-avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="Marcus T."></div>
+        <div>
+          <span class="test-name">Marcus T.</span>
+          <span class="test-loc">London, UK</span>
+        </div>
+      </div>
+    </div>
+    <div class="test-card reveal">
+      <div class="test-stars">★ ★ ★ ★ ★</div>
+      <p class="test-text">"My chronic migraines vanished after the personalised herbal protocol. Six months later, I'm still migraine-free. This isn't alternative medicine — it's profound medicine."</p>
+      <div class="test-author">
+        <div class="test-avatar"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80" alt="Leila M."></div>
+        <div>
+          <span class="test-name">Leila M.</span>
+          <span class="test-loc">Dubai, UAE</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section" id="contact">
+  <h2>Begin your <em>healing</em><br>journey today</h2>
+  <a href="#" class="btn-dark">Book a Consultation</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="nav-logo">Vaidya <span>Ayurveda</span></span>
+      <p>Ancient wisdom for modern healing. Restoring balance, one body at a time, through the timeless science of Ayurveda.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Treatments</h4>
+      <ul>
+        <li><a href="#">Panchakarma</a></li>
+        <li><a href="#">Shirodhara</a></li>
+        <li><a href="#">Abhyanga</a></li>
+        <li><a href="#">Herbal Medicine</a></li>
+        <li><a href="#">Yoga Therapy</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Learn</h4>
+      <ul>
+        <li><a href="#">The Doshas</a></li>
+        <li><a href="#">Ayurvedic Diet</a></li>
+        <li><a href="#">Seasonal Rituals</a></li>
+        <li><a href="#">Blog & Recipes</a></li>
+        <li><a href="#">Online Courses</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="#">Book Consultation</a></li>
+        <li><a href="#">Visit Us</a></li>
+        <li><a href="#">hello@vaidya.com</a></li>
+        <li><a href="#">+91 98765 43210</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Vaidya Ayurveda. All rights reserved.</span>
+    <div class="social-links">
+      <a href="#" aria-label="Instagram">IG</a>
+      <a href="#" aria-label="Facebook">FB</a>
+      <a href="#" aria-label="YouTube">YT</a>
+      <a href="#" aria-label="Pinterest">PT</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // NAV shrink on scroll
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Hamburger
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.add('open');
+  });
+  document.getElementById('closeMenu').addEventListener('click', closeMobile);
+  function closeMobile() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        const delay = e.target.closest('.services-grid, .doshas-grid, .test-grid')
+          ? Array.from(e.target.parentElement.children).indexOf(e.target) * 100
+          : 0;
+        setTimeout(() => e.target.classList.add('visible'), delay);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Smooth active nav highlight
+  const sections = document.querySelectorAll('section[id], .cta-section[id]');
+  const links = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    links.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current
+        ? 'var(--gold-light)' : '';
+    });
+  });
+</script>
+</body>
+</html>
